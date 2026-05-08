@@ -1,0 +1,61 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.swp
+*.tmp
+*.log
+*.vs/
+.vscode/
+TestResults/
+*.ncrunch*
+*.localhistory/
+*.DS_Store
+*.idea/
+*.sln.ide
+*.vsconfig
+# Rider
+.idea/
+*.sln.iml
+# OS generated files
+Thumbs.db
+.DS_Store
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+# dotCover
+*.dotCover
+# Azure Pipelines
+.vsts/
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+# NCrunch
+*.ncrunch*
+# Visual Studio Code
+.history/
+# Local NuGet packages
+*.nupkg
+# Paket dependency manager
+.paket/
+paket-files/
+# JetBrains Rider
+.idea/
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+# Mono Auto Generated Files
+test-results/
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini
+# Python virtual environments
+venv/
+ENV/
