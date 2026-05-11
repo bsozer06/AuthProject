@@ -1,7 +1,9 @@
 using System.Text;
 using AuthProject.Data;
 using AuthProject.Services;
+using AuthProject.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
@@ -12,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
 
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
@@ -31,6 +34,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
         };
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    // You can define specific policies here, or use a dynamic provider later
+    options.AddPolicy("CanDeleteUsers", policy => 
+        policy.Requirements.Add(new PermissionRequirement("Permissions.Users.Delete")));
+        
+    options.AddPolicy("CanReadUsers", policy => 
+        policy.Requirements.Add(new PermissionRequirement("Permissions.Users.Read")));
+});
 
 var app = builder.Build();
 
